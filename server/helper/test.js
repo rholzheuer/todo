@@ -25,7 +25,6 @@ const initializeTestDb = () => {
       console.error("Error initializing the database:", err);
       return;
     }
-    console.log("Database initialized!");
   });
 };
 const insertTestUser = async (email, password) => {
@@ -44,7 +43,6 @@ const insertTestUser = async (email, password) => {
       hashedPassword,
     ]);
 
-    console.log("SUCCESSFULLY INSERTED USER", email);
   } catch (error) {
     console.log("****Error****", error);
     throw error; // Re-throw the error so the test can catch it

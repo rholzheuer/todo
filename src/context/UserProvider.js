@@ -2,7 +2,7 @@ import { useState } from "react";
 import { UserContext } from "./UserContext";
 import axios from "axios";
 
-const url = process.env.REACT_APP_API_URL || "http://localhost:3001";
+const url = process.env.REACT_APP_API_URL;
 
 export default function UserProvider({ children }) {
   const userFromSessionStorage = sessionStorage.getItem("user");
@@ -24,15 +24,12 @@ export default function UserProvider({ children }) {
   };
 
   const signIn = async () => {
-    console.log("Sign In function ran!");
     const json = JSON.stringify(user);
     console.log("JSON", json);
     const headers = { headers: { "Content-Type": "application/json" } };
     try {
       const response = await axios.post(url + "/user/login", json, headers);
-      const token = response.data.token;
-      console.log("RESPONSE FROM BACKEND", response);
-      console.log("TOKEN", token);
+      
       setUser(response.data);
       sessionStorage.setItem("user", JSON.stringify(response.data));
     } catch (error) {
